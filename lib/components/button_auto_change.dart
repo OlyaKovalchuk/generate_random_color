@@ -1,7 +1,7 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
-import 'bloc/color_bloc.dart';
-import 'bloc/color_event.dart';
+import 'package:test_task/utils/timer_function.dart';
+import '../bloc/color_bloc.dart';
+import '../constants/constants.dart';
 
 class ButtonAutoChange extends StatelessWidget {
   final ColorBloc colorBloc;
@@ -15,20 +15,10 @@ class ButtonAutoChange extends StatelessWidget {
         onPressed: () {
           colorBloc.isAuto = !colorBloc.isAuto;
           if (!colorBloc.isAuto) {
-            _timerForChangeColor();
+            timerForChangeColor(colorBloc);
           }
         },
         child: Text(
-            colorBloc.isAuto ? 'Change automatically' : 'Change manually'));
-  }
-
-  Timer _timerForChangeColor() {
-    return Timer.periodic(const Duration(seconds: 2), (timer) {
-      colorBloc.add(AutoChangeColorEvent());
-      if (colorBloc.isAuto) {
-        print('timer cancel');
-        timer.cancel();
-      }
-    });
+            colorBloc.isAuto ? changeAuto : changeManually));
   }
 }

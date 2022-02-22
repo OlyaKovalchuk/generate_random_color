@@ -1,10 +1,10 @@
 import 'dart:async';
-import 'dart:math';
 import 'dart:ui';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test_task/bloc/color_event.dart';
 import 'package:test_task/bloc/color_state.dart';
+import 'package:test_task/utils/random_color_fun.dart';
 
 class ColorBloc extends Bloc<ColorEvent, ColorState> {
   bool isAuto = true;
@@ -16,7 +16,12 @@ class ColorBloc extends Bloc<ColorEvent, ColorState> {
 
   Future<void> _randomColor(Emitter<ColorState> emit) async {
     emit(InitState());
-    Color _color = Color(Random().nextInt(0xffffffff));
-    emit(ReadyState(_color));
+    try {
+      Color _color = getRandomColor();
+
+      emit(ReadyState(_color));
+    } catch (e) {
+      emit(ErrorState());
+    }
   }
 }

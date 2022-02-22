@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-class ColorEvent extends Equatable {
+abstract class ColorEvent extends Equatable {
   @override
   List<Object?> get props => [];
 }

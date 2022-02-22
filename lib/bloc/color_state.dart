@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:equatable/equatable.dart';
 
-class ColorState extends Equatable {
+abstract class ColorState extends Equatable {
   @override
   List<Object?> get props => [];
 }
@@ -14,3 +14,5 @@ class ReadyState extends ColorState {
 
   ReadyState(this.color);
 }
+
+class ErrorState extends ColorState {}
